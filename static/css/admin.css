@@ -1,0 +1,200 @@
+/* CampusConnect Admin Dashboard Styling */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --admin-sidebar-bg: #07162c;
+  --admin-sidebar-hover: #132a4e;
+  --admin-active-blue: #2563eb;
+  --admin-body-bg: #f8fafc;
+  --admin-card-bg: #ffffff;
+  --admin-border: #e2e8f0;
+}
+
+body.admin-body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--admin-body-bg);
+  color: #1e293b;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.admin-sidebar {
+  width: 260px;
+  background: var(--admin-sidebar-bg);
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-brand {
+  padding: 1.5rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 1rem 0.75rem;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.sidebar-nav .nav-item {
+  margin-bottom: 0.35rem;
+}
+
+.sidebar-nav .nav-link {
+  color: #94a3b8;
+  font-weight: 500;
+  font-size: 0.92rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.sidebar-nav .nav-link:hover {
+  background: var(--admin-sidebar-hover);
+  color: #ffffff;
+}
+
+.sidebar-nav .nav-link.active {
+  background: var(--admin-active-blue);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.sidebar-nav .nav-link i {
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.sidebar-footer {
+  padding: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Main Content Area */
+.admin-main {
+  margin-left: 260px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.admin-topbar {
+  background: #ffffff;
+  border-bottom: 1px solid var(--admin-border);
+  padding: 0.85rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 900;
+}
+
+.admin-container {
+  padding: 2rem;
+  flex-grow: 1;
+}
+
+/* Admin Metric Cards */
+.admin-card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid var(--admin-border);
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.metric-widget {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid var(--admin-border);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+}
+
+.metric-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.metric-val {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.1;
+}
+
+.metric-title {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 600;
+  margin-top: 0.2rem;
+}
+
+/* Tables */
+.admin-table th {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  background-color: #f8fafc;
+  border-bottom: 1px solid var(--admin-border);
+  padding: 0.85rem 1rem;
+}
+
+.admin-table td {
+  padding: 0.95rem 1rem;
+  vertical-align: middle;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+/* Engine Badge */
+.badge-engine-mysql {
+  background: #00758f;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 50px;
+}
+
+.badge-engine-sqlite {
+  background: #0284c7;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 50px;
+}
+
+@media (max-width: 991.98px) {
+  .admin-sidebar {
+    left: -260px;
+  }
+  .admin-sidebar.show {
+    left: 0;
+  }
+  .admin-main {
+    margin-left: 0;
+  }
+}

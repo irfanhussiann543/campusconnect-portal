@@ -1,0 +1,154 @@
+{% extends "admin/layout.html" %}
+
+{% block title %}Admissions & Enquiries — CampusConnect Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h3 class="fw-bold text-navy mb-1">Admissions Workflow & Applicant Tracking</h3>
+    <p class="text-muted small mb-0">Review submitted online admission applications, change evaluation status, and handle counseling inquiries.</p>
+  </div>
+</div>
+
+<!-- Tabs: Applications vs Enquiries -->
+<ul class="nav nav-pills mb-4 gap-2" id="admissionTab" role="tablist">
+  <li class="nav-item">
+    <button class="nav-link active px-4 py-2 rounded-pill fw-bold" id="apps-tab" data-bs-toggle="pill" data-bs-target="#apps-content" type="button">
+      <i class="fa-solid fa-file-signature me-1"></i> Applications ({{ applications|length }})
+    </button>
+  </li>
+  <li class="nav-item">
+    <button class="nav-link px-4 py-2 rounded-pill fw-bold" id="enq-tab" data-bs-toggle="pill" data-bs-target="#enq-content" type="button">
+      <i class="fa-solid fa-headset me-1"></i> Inquiries & Leads ({{ enquiries|length }})
+    </button>
+  </li>
+</ul>
+
+<div class="tab-content" id="admissionTabContent">
+  <!-- 1. Applications Tab -->
+  <div class="tab-pane fade show active" id="apps-content">
+    <div class="card border rounded-4 shadow-sm overflow-hidden">
+      <div class="table-responsive">
+        <table class="table admin-table align-middle mb-0">
+          <thead>
+            <tr>
+              <th>App No. & Date</th>
+              <th>Applicant Name & Parent</th>
+              <th>Contact Details</th>
+              <th>Program Choice</th>
+              <th>Marks (10th / 12th)</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for a in applications %}
+            <tr>
+              <td>
+                <span class="badge bg-secondary-subtle text-secondary font-monospace d-block mb-1">{{ a.application_no }}</span>
+                <small class="text-muted">{{ a.created_at.strftime('%b %d, %Y') }}</small>
+              </td>
+              <td>
+                <strong class="text-navy d-block">{{ a.full_name }}</strong>
+                <small class="text-muted">Parent: {{ a.parent_name }}</small>
+              </td>
+              <td>
+                <div class="small"><i class="fa-solid fa-envelope text-primary me-1"></i> {{ a.email }}</div>
+                <div class="small"><i class="fa-solid fa-phone text-primary me-1"></i> {{ a.phone }}</div>
+              </td>
+              <td><span class="badge bg-primary text-white">{{ a.department_choice }}</span></td>
+              <td>
+                <small class="d-block">10th: <strong>{{ a.tenth_percentage }}%</strong></small>
+                <small class="d-block">12th: <strong>{{ a.twelfth_percentage }}%</strong></small>
+                {% if a.entrance_score %}
+                <small class="text-muted text-truncate d-block" style="max-width: 140px;">{{ a.entrance_score }}</small>
+                {% endif %}
+              </td>
+              <td>
+                <span class="badge {{ 'bg-success' if a.status == 'Approved' else ('bg-danger' if a.status == 'Rejected' else ('bg-warning text-dark' if a.status == 'Under Review' else 'bg-primary')) }}">
+                  {{ a.status }}
+                </span>
+              </td>
+              <td>
+                <form action="{{ url_for('admin.update_application_status', id=a.id) }}" method="POST" class="d-flex gap-1 align-items-center">
+                  <select name="status" class="form-select form-select-sm rounded-3" style="width: 130px;">
+                    <option value="Submitted" {{ 'selected' if a.status == 'Submitted' }}>Submitted</option>
+                    <option value="Under Review" {{ 'selected' if a.status == 'Under Review' }}>Under Review</option>
+                    <option value="Approved" {{ 'selected' if a.status == 'Approved' }}>Approved</option>
+                    <option value="Rejected" {{ 'selected' if a.status == 'Rejected' }}>Rejected</option>
+                  </select>
+                  <button type="submit" class="btn btn-sm btn-outline-primary" title="Update Status">
+                    <i class="fa-solid fa-check"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="7" class="text-center py-5 text-muted">No applications submitted yet.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Enquiries Tab -->
+  <div class="tab-pane fade" id="enq-content">
+    <div class="card border rounded-4 shadow-sm overflow-hidden">
+      <div class="table-responsive">
+        <table class="table admin-table align-middle mb-0">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Student Name</th>
+              <th>Contact</th>
+              <th>Course of Interest</th>
+              <th>Query Message</th>
+              <th>Status</th>
+              <th>Update Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for eq in enquiries %}
+            <tr>
+              <td><small class="text-muted">{{ eq.created_at.strftime('%b %d, %Y') }}</small></td>
+              <td><strong class="text-navy">{{ eq.student_name }}</strong></td>
+              <td>
+                <small class="d-block">{{ eq.email }}</small>
+                <small class="d-block text-muted">{{ eq.phone }}</small>
+              </td>
+              <td><span class="badge bg-secondary-subtle text-secondary">{{ eq.course_interested }}</span></td>
+              <td style="max-width: 250px;"><small class="text-muted">{{ eq.message }}</small></td>
+              <td>
+                <span class="badge {{ 'bg-success' if eq.status == 'Closed' else ('bg-danger' if eq.status == 'New' else 'bg-warning text-dark') }}">
+                  {{ eq.status }}
+                </span>
+              </td>
+              <td>
+                <form action="{{ url_for('admin.update_enquiry_status', id=eq.id) }}" method="POST" class="d-flex gap-1 align-items-center">
+                  <select name="status" class="form-select form-select-sm rounded-3" style="width: 120px;">
+                    <option value="New" {{ 'selected' if eq.status == 'New' }}>New</option>
+                    <option value="Contacted" {{ 'selected' if eq.status == 'Contacted' }}>Contacted</option>
+                    <option value="In Review" {{ 'selected' if eq.status == 'In Review' }}>In Review</option>
+                    <option value="Closed" {{ 'selected' if eq.status == 'Closed' }}>Closed</option>
+                  </select>
+                  <button type="submit" class="btn btn-sm btn-outline-primary" title="Update Status">
+                    <i class="fa-solid fa-check"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="7" class="text-center py-5 text-muted">No admission enquiries logged yet.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

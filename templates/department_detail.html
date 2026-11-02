@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block title %}Department of {{ department.name }} ({{ department.code }}) — CampusConnect{% endblock %}
+
+{% block content %}
+<!-- Department Header Banner -->
+<section class="py-5 text-white" style="background: linear-gradient(135deg, var(--cc-navy) 0%, var(--cc-royal) 100%);">
+  <div class="container py-3">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-2">
+        <li class="breadcrumb-item"><a href="{{ url_for('public.index') }}" class="text-light text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('public.departments') }}" class="text-light text-decoration-none">Departments</a></li>
+        <li class="breadcrumb-item active text-warning" aria-current="page">{{ department.code }}</li>
+      </ol>
+    </nav>
+    <div class="d-flex align-items-center gap-3">
+      <div class="bg-white text-primary p-3 rounded-4 fs-2 d-none d-sm-block">
+        <i class="fa-solid {{ department.icon }}"></i>
+      </div>
+      <div>
+        <h1 class="fw-bold text-white mb-1">{{ department.name }}</h1>
+        <p class="text-light mb-0 lead" style="opacity: 0.9;">
+          Established in {{ department.established_year }} • Autonomous NBA Tier-1 Accredited • {{ department.intake }} Annual Intake
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main Department Content -->
+<section class="section-padding">
+  <div class="container">
+    <div class="row g-5">
+      <!-- Left Column: Department Info, Courses, Labs, Achievements -->
+      <div class="col-lg-8">
+        <!-- 1. Department Overview -->
+        <div class="mb-5">
+          <span class="section-tag mb-2"><i class="fa-solid fa-circle-info me-1"></i> Overview</span>
+          <h2 class="fw-bold text-navy mb-3">About the Department</h2>
+          <p class="text-muted lead" style="font-size: 1.05rem;">
+            {{ department.description }}
+          </p>
+        </div>
+
+        <!-- 2. Courses Offered -->
+        <div class="mb-5">
+          <span class="section-tag mb-2"><i class="fa-solid fa-graduation-cap me-1"></i> Academic Programs</span>
+          <h3 class="fw-bold text-navy mb-4">Courses & Curricula Offered</h3>
+          
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="card h-100 border rounded-4 p-4 shadow-sm bg-light">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="badge bg-primary text-white">Undergraduate (UG)</span>
+                  <span class="text-muted small fw-bold"><i class="fa-regular fa-clock me-1"></i> 4 Years (8 Sems)</span>
+                </div>
+                <h5 class="fw-bold text-navy mb-2">B.Tech in {{ department.name }}</h5>
+                <p class="text-muted small mb-3">Comprehensive core engineering grounded in theory, programming/simulation, and capstone industrial thesis.</p>
+                <div class="mt-auto pt-2 border-top d-flex justify-content-between small text-muted">
+                  <span>Intake: <strong>{{ department.intake }} Seats</strong></span>
+                  <span>Degree: <strong>Autonomous B.Tech</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="card h-100 border rounded-4 p-4 shadow-sm bg-light">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="badge bg-success text-white">Postgraduate (PG)</span>
+                  <span class="text-muted small fw-bold"><i class="fa-regular fa-clock me-1"></i> 2 Years (4 Sems)</span>
+                </div>
+                <h5 class="fw-bold text-navy mb-2">M.Tech in Advanced {{ department.code }} Systems</h5>
+                <p class="text-muted small mb-3">Specialized research degree focused on high-throughput computation, applied research, and patent filing.</p>
+                <div class="mt-auto pt-2 border-top d-flex justify-content-between small text-muted">
+                  <span>Intake: <strong>24 Seats</strong></span>
+                  <span>Degree: <strong>M.Tech / GATE</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Laboratory Facilities -->
+        <div class="mb-5">
+          <span class="section-tag mb-2"><i class="fa-solid fa-flask-vial me-1"></i> Research & Practice</span>
+          <h3 class="fw-bold text-navy mb-4">Laboratory & Computing Facilities ({{ department.labs_count }} Labs)</h3>
+
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <div class="p-3 bg-white border rounded-3 shadow-sm h-100">
+                <div class="d-flex align-items-center gap-2 mb-2 text-primary fw-bold">
+                  <i class="fa-solid fa-microchip fs-5"></i> Advanced Research Lab I
+                </div>
+                <p class="text-muted small mb-0">High-performance workstations configured with dual GPU clusters, gigabit intranet, and enterprise software toolkits.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="p-3 bg-white border rounded-3 shadow-sm h-100">
+                <div class="d-flex align-items-center gap-2 mb-2 text-primary fw-bold">
+                  <i class="fa-solid fa-network-wired fs-5"></i> Industry Co-Creation Center
+                </div>
+                <p class="text-muted small mb-0">Established in collaboration with leading tech partners to simulate live production systems and integration testing.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="p-3 bg-white border rounded-3 shadow-sm h-100">
+                <div class="d-flex align-items-center gap-2 mb-2 text-primary fw-bold">
+                  <i class="fa-solid fa-satellite-dish fs-5"></i> Specialized Simulation Suite
+                </div>
+                <p class="text-muted small mb-0">MATLAB, Simulink, ANSYS, Cadence, and cloud sandboxes for physical validation and stress analytics.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="p-3 bg-white border rounded-3 shadow-sm h-100">
+                <div class="d-flex align-items-center gap-2 mb-2 text-primary fw-bold">
+                  <i class="fa-solid fa-robot fs-5"></i> Prototyping & Capstone Studio
+                </div>
+                <p class="text-muted small mb-0">Rapid prototyping tools, 3D printers, microcontroller kits, and test instruments for final-year projects.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Department Achievements -->
+        <div class="mb-4">
+          <span class="section-tag mb-2"><i class="fa-solid fa-trophy me-1"></i> Highlights</span>
+          <h3 class="fw-bold text-navy mb-4">Department Achievements</h3>
+
+          <div class="p-4 bg-light rounded-4 border">
+            <ul class="list-unstyled mb-0 text-muted">
+              <li class="mb-3 d-flex align-items-start gap-3">
+                <i class="fa-solid fa-medal text-warning fs-5 mt-1"></i>
+                <div>
+                  <strong class="text-navy">Smart India Hackathon Winners:</strong> Student teams from {{ department.code }} secured First Prize for two consecutive editions.
+                </div>
+              </li>
+              <li class="mb-3 d-flex align-items-start gap-3">
+                <i class="fa-solid fa-scroll text-primary fs-5 mt-1"></i>
+                <div>
+                  <strong class="text-navy">Publications & Patents:</strong> Over 120 peer-reviewed IEEE, Scopus, and SCI journal publications authored in the last 3 years.
+                </div>
+              </li>
+              <li class="d-flex align-items-start gap-3">
+                <i class="fa-solid fa-briefcase text-success fs-5 mt-1"></i>
+                <div>
+                  <strong class="text-navy">High Placement Conversion:</strong> 98%+ placement record with graduates recruited into Google, Microsoft, Qualcomm, and Tesla.
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: HOD Profile & Faculty Roster -->
+      <div class="col-lg-4">
+        <!-- HOD Card -->
+        <div class="card border rounded-4 shadow-sm p-4 text-center mb-4 sticky-top" style="top: 100px; z-index: 10;">
+          <span class="badge bg-primary text-white mx-auto mb-3 px-3 py-1">Head of Department</span>
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" 
+               alt="{{ department.hod_name }}" 
+               class="rounded-circle mx-auto mb-3 shadow" style="width: 110px; height: 110px; object-fit: cover;">
+          <h5 class="fw-bold text-navy mb-1">{{ department.hod_name }}</h5>
+          <p class="text-primary small fw-semibold mb-2">{{ department.hod_qualification }}</p>
+          <p class="text-muted small mb-3">
+            <i class="fa-solid fa-envelope me-1 text-primary"></i> <a href="mailto:{{ department.hod_email }}" class="text-decoration-none">{{ department.hod_email }}</a>
+          </p>
+          <div class="p-3 bg-light rounded-3 text-start mb-3 border">
+            <strong class="text-navy small d-block mb-1">HOD's Message:</strong>
+            <p class="text-muted small mb-0 fst-italic">"In the Department of {{ department.code }}, we encourage our students to look beyond conventional boundaries and build robust systems with global relevance."</p>
+          </div>
+          <a href="{{ url_for('public.admissions') }}" class="btn-gold-cc w-100 justify-content-center btn-sm py-2">
+            Apply to {{ department.code }} Program
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Department Faculty Roster Section -->
+    <div class="mt-5 pt-4 border-top">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <span class="section-tag mb-1"><i class="fa-solid fa-users me-1"></i> Department Faculty</span>
+          <h3 class="fw-bold text-navy mb-0">Distinguished Faculty Members</h3>
+        </div>
+        <a href="{{ url_for('public.faculty', dept=department.code) }}" class="btn btn-outline-primary btn-sm rounded-3 fw-bold">View Full Profiles</a>
+      </div>
+
+      <div class="row g-4">
+        {% for prof in faculty %}
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border rounded-4 p-3 shadow-sm hover-lift">
+            <div class="d-flex gap-3 align-items-center mb-3">
+              <img src="{{ prof.photo_url }}" alt="{{ prof.name }}" class="rounded-circle" style="width: 65px; height: 65px; object-fit: cover;">
+              <div>
+                <h6 class="fw-bold text-navy mb-0">{{ prof.name }}</h6>
+                <small class="text-primary fw-semibold d-block">{{ prof.designation }}</small>
+                <small class="text-muted">{{ prof.qualification }}</small>
+              </div>
+            </div>
+            <p class="text-muted small mb-2"><strong class="text-navy">Focus:</strong> {{ prof.specialization }}</p>
+            <div class="mt-auto pt-2 border-top small text-muted">
+              <i class="fa-solid fa-envelope me-1 text-primary"></i> <a href="mailto:{{ prof.email }}" class="text-decoration-none text-muted">{{ prof.email }}</a>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div class="col-12 text-center py-4 text-muted">
+          Faculty profiles are currently being synchronized for this department.
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+
+{% block title %}Student Corner — CampusConnect Institute of Technology{% endblock %}
+
+{% block content %}
+<!-- Subpage Header Banner -->
+<section class="py-5 text-white" style="background: linear-gradient(135deg, var(--cc-navy) 0%, var(--cc-royal) 100%);">
+  <div class="container py-3">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-2">
+        <li class="breadcrumb-item"><a href="{{ url_for('public.index') }}" class="text-light text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active text-warning" aria-current="page">Student Corner</li>
+      </ol>
+    </nav>
+    <h1 class="fw-bold text-white mb-2">Student Corner & Digital Resources</h1>
+    <p class="lead text-light mb-0" style="max-width: 650px; opacity: 0.9;">
+      Centralized portal for lecture notes, ERP credentials, exam notifications, grievance redressal, and essential student services.
+    </p>
+  </div>
+</section>
+
+<!-- Student Quick Portals Grid -->
+<section class="section-padding">
+  <div class="container">
+    <div class="section-title-wrap">
+      <span class="section-tag"><i class="fa-solid fa-link me-1"></i> Quick Portals</span>
+      <h2 class="section-title">Essential Campus Systems</h2>
+      <p class="section-subtitle">Direct links to institutional platforms for attendance, online quizzes, fee settlement, and e-books.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-3 col-sm-6">
+        <a href="#" class="card h-100 border rounded-4 p-4 text-center text-decoration-none bg-white shadow-sm hover-lift">
+          <div class="dept-icon mx-auto mb-3" style="background: #e0f2fe; color: #0284c7;">
+            <i class="fa-solid fa-id-card-clip"></i>
+          </div>
+          <h5 class="fw-bold text-navy mb-1">Student ERP</h5>
+          <p class="text-muted small mb-0">Check real-time attendance, internal marks, and hall ticket eligibility.</p>
+        </a>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <a href="#" class="card h-100 border rounded-4 p-4 text-center text-decoration-none bg-white shadow-sm hover-lift">
+          <div class="dept-icon mx-auto mb-3" style="background: #fef3c7; color: #d97706;">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <h5 class="fw-bold text-navy mb-1">Moodle LMS</h5>
+          <p class="text-muted small mb-0">Submit assignments, take lab quizzes, and access recorded video lectures.</p>
+        </a>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <a href="#" class="card h-100 border rounded-4 p-4 text-center text-decoration-none bg-white shadow-sm hover-lift">
+          <div class="dept-icon mx-auto mb-3" style="background: #dcfce7; color: #16a34a;">
+            <i class="fa-solid fa-book-bookmark"></i>
+          </div>
+          <h5 class="fw-bold text-navy mb-1">Digital Library (OPAC)</h5>
+          <p class="text-muted small mb-0">Access IEEE Xplore, ScienceDirect, Springer, and renew book reservations.</p>
+        </a>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <a href="#" class="card h-100 border rounded-4 p-4 text-center text-decoration-none bg-white shadow-sm hover-lift">
+          <div class="dept-icon mx-auto mb-3" style="background: #f3e8ff; color: #9333ea;">
+            <i class="fa-solid fa-credit-card"></i>
+          </div>
+          <h5 class="fw-bold text-navy mb-1">Fee Payment Portal</h5>
+          <p class="text-muted small mb-0">Pay semester tuition, exam registration, hostel dues, and download receipts.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Downloadable Study Materials Repository -->
+<section class="section-padding section-bg-light">
+  <div class="container">
+    <div class="section-title-wrap">
+      <span class="section-tag"><i class="fa-solid fa-folder-open me-1"></i> Courseware</span>
+      <h2 class="section-title">Downloadable Study Materials & Question Papers</h2>
+      <p class="section-subtitle">Curated courseware, verified faculty lecture notes, and previous year university question banks.</p>
+    </div>
+
+    <div class="row g-3">
+      {% for doc in study_materials + academic_docs %}
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border rounded-4 p-3 bg-white shadow-sm hover-lift">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="bg-primary-subtle text-primary p-3 rounded-3 fs-3">
+              <i class="fa-solid {{ 'fa-file-pdf' if doc.file_type == 'PDF' else 'fa-file-lines' }}"></i>
+            </div>
+            <div>
+              <span class="badge bg-secondary-subtle text-secondary small">{{ doc.category }}</span>
+              <h6 class="fw-bold text-navy mb-0 text-truncate" style="max-width: 220px;">{{ doc.title }}</h6>
+              <small class="text-muted">{{ doc.file_size }} • Semester: {{ doc.semester or 'All' }}</small>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-2">
+            <span class="small text-muted"><i class="fa-regular fa-calendar me-1"></i> {{ doc.upload_date.strftime('%b %d, %Y') }}</span>
+            <a href="{{ doc.file_path }}" download class="btn btn-outline-primary btn-sm rounded-3">
+              <i class="fa-solid fa-download me-1"></i> Download
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- FAQs & Student Grievance / Feedback -->
+<section class="section-padding">
+  <div class="container">
+    <div class="row g-5">
+      <!-- FAQs Accordion -->
+      <div class="col-lg-6">
+        <span class="section-tag mb-2"><i class="fa-solid fa-circle-question me-1"></i> Helpdesk</span>
+        <h3 class="fw-bold text-navy mb-4">Frequently Asked Questions</h3>
+
+        <div class="accordion" id="faqAccordion">
+          <div class="accordion-item border rounded-3 mb-2 overflow-hidden shadow-sm">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button fw-bold text-navy" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                What is the minimum attendance requirement for semester exams?
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted small">
+                Students must maintain a minimum of 75% attendance in both lecture and practical laboratory components to be issued hall tickets. An additional 10% condonation is permissible on genuine medical grounds subject to medical certificate submission.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item border rounded-3 mb-2 overflow-hidden shadow-sm">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed fw-bold text-navy" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                How do I apply for official academic transcripts or certificates?
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted small">
+                Transcripts can be applied through the Student ERP portal under 'Certificates' tab or directly at the Office of the Controller of Examinations. Processing time is usually 3-5 working days.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item border rounded-3 mb-2 overflow-hidden shadow-sm">
+            <h2 class="accordion-header" id="headingThree">
+              <button class="accordion-button collapsed fw-bold text-navy" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                Can I pursue an engineering minor in another department?
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted small">
+                Yes! Under the CBCS framework, students maintaining a CGPA of 7.5 or above at the end of the 2nd semester are eligible to register for minor degrees in Artificial Intelligence, Cybersecurity, Robotics, or Renewable Energy.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item border rounded-3 overflow-hidden shadow-sm">
+            <h2 class="accordion-header" id="headingFour">
+              <button class="accordion-button collapsed fw-bold text-navy" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                What are the library working hours during exam periods?
+              </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted small">
+                The Central Digital Library reading halls and Wi-Fi lounges operate 24 hours a day, 7 days a week, including Sundays and public holidays, starting 3 weeks prior to semester examinations.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grievance & Feedback Lodging Form -->
+      <div class="col-lg-6">
+        <span class="section-tag mb-2"><i class="fa-solid fa-headset me-1"></i> Student Welfare</span>
+        <h3 class="fw-bold text-navy mb-4">Grievance & Suggestion Redressal Cell</h3>
+
+        <div class="card border rounded-4 p-4 shadow-sm bg-white">
+          <p class="text-muted small mb-3">
+            Have a concern regarding academic instruction, hostel facilities, or administrative services? Submit your request directly to the Dean of Student Affairs.
+          </p>
+
+          <form action="{{ url_for('public.student_corner') }}" method="POST">
+            <div class="row g-2 mb-2">
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-navy">Student Name *</label>
+                <input type="text" name="student_name" class="form-control form-control-sm rounded-3" placeholder="Full Name" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-navy">Roll / Register Number *</label>
+                <input type="text" name="roll_number" class="form-control form-control-sm rounded-3" placeholder="e.g., 23CSE104" required>
+              </div>
+            </div>
+
+            <div class="row g-2 mb-2">
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-navy">College Email ID *</label>
+                <input type="email" name="email" class="form-control form-control-sm rounded-3" placeholder="student@campusconnect.edu" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-navy">Category *</label>
+                <select name="category" class="form-select form-select-sm rounded-3" required>
+                  <option value="Academic">Academic / Examination</option>
+                  <option value="Hostel & Mess">Hostel & Mess Facility</option>
+                  <option value="Laboratory">Laboratory & Computing</option>
+                  <option value="Sports & Library">Sports, Transport & Library</option>
+                  <option value="General Suggestion">General Suggestion</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <label class="form-label small fw-bold text-navy">Subject / Issue Summary *</label>
+              <input type="text" name="subject" class="form-control form-control-sm rounded-3" placeholder="Brief subject" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold text-navy">Detailed Description *</label>
+              <textarea name="description" rows="3" class="form-control form-control-sm rounded-3" placeholder="Explain your feedback or grievance clearly..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary-cc w-100 justify-content-center py-2">
+              <i class="fa-solid fa-paper-plane me-1"></i> Submit Redressal Request
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

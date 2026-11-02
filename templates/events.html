@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}Events & Announcements Notice Board — CampusConnect{% endblock %}
+
+{% block content %}
+<!-- Subpage Header Banner -->
+<section class="py-5 text-white" style="background: linear-gradient(135deg, var(--cc-navy) 0%, var(--cc-royal) 100%);">
+  <div class="container py-3">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-2">
+        <li class="breadcrumb-item"><a href="{{ url_for('public.index') }}" class="text-light text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active text-warning" aria-current="page">Events & Notices</li>
+      </ol>
+    </nav>
+    <h1 class="fw-bold text-white mb-2">Campus Notice Board & Events Hub</h1>
+    <p class="lead text-light mb-0" style="max-width: 650px; opacity: 0.9;">
+      Stay informed with instant updates on university examinations, national hackathons, technical workshops, and cultural celebrations.
+    </p>
+  </div>
+</section>
+
+<!-- Filter Tabs and Search Bar -->
+<section class="py-4 bg-light border-bottom sticky-top" style="top: 75px; z-index: 100;">
+  <div class="container">
+    <div class="row g-3 align-items-center">
+      <!-- Search Input -->
+      <div class="col-md-5">
+        <form action="{{ url_for('public.events') }}" method="GET" class="d-flex">
+          <input type="text" name="q" class="form-control rounded-start-3" placeholder="Search notices, exams, seminars..." value="{{ search_query }}">
+          {% if selected_cat and selected_cat != 'All' %}
+          <input type="hidden" name="cat" value="{{ selected_cat }}">
+          {% endif %}
+          <button type="submit" class="btn btn-primary-cc rounded-0 rounded-end-3 px-3">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
+
+      <!-- Categories Filter Tabs -->
+      <div class="col-md-7">
+        <div class="d-flex flex-wrap gap-2 justify-content-md-end overflow-x-auto pb-1">
+          {% for c in categories %}
+          <a href="{{ url_for('public.events', cat=c, q=search_query) }}" 
+             class="btn btn-sm {{ 'btn-primary-cc' if selected_cat == c else 'btn-outline-secondary' }} rounded-pill px-3 flex-shrink-0">
+            {{ c }}
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Notice Board Content (Tabs: Notices vs Events) -->
+<section class="section-padding">
+  <div class="container">
+    <ul class="nav nav-pills justify-content-center mb-5 gap-2" id="noticeTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active px-4 py-2 rounded-pill fw-bold" id="notices-tab" data-bs-toggle="pill" data-bs-target="#notices-content" type="button" role="tab">
+          <i class="fa-solid fa-bullhorn me-2"></i> Official Notices ({{ announcements|length }})
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link px-4 py-2 rounded-pill fw-bold" id="events-tab" data-bs-toggle="pill" data-bs-target="#events-content" type="button" role="tab">
+          <i class="fa-solid fa-calendar-star me-2"></i> Events & Hackathons ({{ events|length }})
+        </button>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="noticeTabContent">
+      <!-- Tab 1: Official Notices & Circulars -->
+      <div class="tab-pane fade show active" id="notices-content" role="tabpanel">
+        <div class="row g-4">
+          {% for ann in announcements %}
+          <div class="col-lg-6 notice-item" data-category="{{ ann.category }}">
+            <div class="notice-card h-100 {{ 'important' if ann.is_important }}">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="badge {{ 'bg-danger' if ann.is_important else 'bg-primary' }} text-white">
+                  {{ ann.category }}
+                </span>
+                <span class="text-muted small"><i class="fa-regular fa-clock me-1"></i> {{ ann.publish_date.strftime('%B %d, %Y') }}</span>
+              </div>
+              <h5 class="fw-bold text-navy mb-2">{{ ann.title }}</h5>
+              <p class="text-muted small mb-3">{{ ann.summary }}</p>
+              
+              <div class="p-3 bg-light rounded-3 mb-3 small text-muted border">
+                {{ ann.content }}
+              </div>
+
+              {% if ann.attachment_url %}
+              <div class="border-top pt-2">
+                <a href="{{ ann.attachment_url }}" target="_blank" class="btn btn-outline-danger btn-sm rounded-3">
+                  <i class="fa-solid fa-file-pdf me-1"></i> Download Official Circular PDF
+                </a>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          {% else %}
+          <div class="col-12 text-center py-5 text-muted">
+            <i class="fa-solid fa-inbox fs-1 text-secondary mb-3 d-block"></i>
+            <h5>No announcements found matching your criteria.</h5>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Tab 2: Upcoming Events & Hackathons -->
+      <div class="tab-pane fade" id="events-content" role="tabpanel">
+        <div class="row g-4">
+          {% for evt in events %}
+          <div class="col-md-6 col-lg-4">
+            <div class="event-card">
+              <div class="event-img-wrap">
+                <img src="{{ evt.image_url }}" alt="{{ evt.title }}">
+                <div class="event-date-badge">
+                  <span class="day">{{ evt.event_date.strftime('%d') }}</span>
+                  <span class="month">{{ evt.event_date.strftime('%b') }}</span>
+                </div>
+              </div>
+              <div class="event-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="badge bg-primary text-white">{{ evt.category }}</span>
+                  <small class="text-muted"><i class="fa-regular fa-clock me-1"></i> {{ evt.event_time }}</small>
+                </div>
+                <h5 class="fw-bold text-navy mb-2">{{ evt.title }}</h5>
+                <p class="text-muted small mb-3 text-truncate">{{ evt.description }}</p>
+                <div class="small text-muted mb-3">
+                  <i class="fa-solid fa-location-dot text-primary me-1"></i> {{ evt.venue }}<br>
+                  <i class="fa-solid fa-user-group text-primary me-1"></i> By {{ evt.organizer }}
+                </div>
+                <div class="mt-auto border-top pt-3">
+                  <a href="{{ url_for('public.event_detail', event_id=evt.id) }}" class="btn btn-primary-cc btn-sm w-100 justify-content-center">
+                    Register for Event <i class="fa-solid fa-arrow-right ms-1"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% else %}
+          <div class="col-12 text-center py-5 text-muted">
+            <i class="fa-solid fa-calendar-xmark fs-1 text-secondary mb-3 d-block"></i>
+            <h5>No upcoming events found in this category.</h5>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

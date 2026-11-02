@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="240" height="60">
+  <defs>
+    <linearGradient id="crestGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#0f2b48" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Crest Shield -->
+  <g transform="translate(10, 5)">
+    <!-- Shield Outline -->
+    <path d="M25 0 C40 0, 48 8, 48 24 C48 38, 25 48, 25 48 C25 48, 2 38, 2 24 C2 8, 10 0, 25 0 Z" 
+          fill="url(#crestGrad)" stroke="url(#goldGrad)" stroke-width="2.5" />
+    
+    <!-- Open Book / Tech Nodes inside shield -->
+    <!-- Graduation Cap Top -->
+    <path d="M25 10 L38 16 L25 22 L12 16 Z" fill="url(#goldGrad)" />
+    <!-- Tassel -->
+    <path d="M38 16 L38 24" stroke="#fbbf24" stroke-width="1.5" />
+    <!-- Book pages -->
+    <path d="M14 26 C19 23, 23 25, 25 28 C27 25, 31 23, 36 26 L36 34 C31 31, 27 33, 25 35 C23 33, 19 31, 14 34 Z" 
+          fill="#ffffff" opacity="0.9" />
+    <!-- Stars -->
+    <circle cx="25" cy="40" r="1.5" fill="#fbbf24" />
+  </g>
+  
+  <!-- College Brand Typography -->
+  <text x="68" y="27" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="20" fill="#07162c" letter-spacing="-0.5">
+    Campus<tspan fill="#2563eb">Connect</tspan>
+  </text>
+  <text x="68" y="42" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="600" font-size="9" fill="#d97706" letter-spacing="1.2">
+    INSTITUTE OF TECHNOLOGY
+  </text>
+</svg>

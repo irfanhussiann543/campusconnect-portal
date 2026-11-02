@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+
+{% block title %}Placements & Career Center — CampusConnect{% endblock %}
+
+{% block content %}
+<!-- Subpage Header Banner -->
+<section class="py-5 text-white" style="background: linear-gradient(135deg, var(--cc-navy) 0%, var(--cc-royal) 100%);">
+  <div class="container py-3">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-2">
+        <li class="breadcrumb-item"><a href="{{ url_for('public.index') }}" class="text-light text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active text-warning" aria-current="page">Placements</li>
+      </ol>
+    </nav>
+    <h1 class="fw-bold text-white mb-2">Centre for Corporate Relations & Placements</h1>
+    <p class="lead text-light mb-0" style="max-width: 650px; opacity: 0.9;">
+      Connecting tomorrow's engineers with global industry leaders. Over 98.4% placement record with ₹54.5 LPA peak package.
+    </p>
+  </div>
+</section>
+
+<!-- Placement Key Metrics Banner -->
+<section class="section-padding">
+  <div class="container">
+    <div class="row g-4 mb-5">
+      <div class="col-md-3 col-6">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-trophy"></i></div>
+          <div class="stat-number">₹54.5 <small class="fs-6">LPA</small></div>
+          <div class="stat-label">Highest Package Offered</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-chart-line"></i></div>
+          <div class="stat-number">₹8.4 <small class="fs-6">LPA</small></div>
+          <div class="stat-label">Average Annual Package</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-user-check"></i></div>
+          <div class="stat-number">98.4%</div>
+          <div class="stat-label">Eligible Students Placed</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-building"></i></div>
+          <div class="stat-number">210+</div>
+          <div class="stat-label">Participating Tech Giants</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Year-wise Statistics Table -->
+    <div class="card border rounded-4 shadow-sm overflow-hidden mb-5">
+      <div class="card-header bg-navy text-white p-3 d-flex justify-content-between align-items-center" style="background-color: var(--cc-navy);">
+        <h5 class="mb-0 fw-bold"><i class="fa-solid fa-chart-simple text-warning me-2"></i> Year-Wise Placement Track Record</h5>
+        <span class="badge bg-success">Verified Audit Report</span>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>Academic Batch</th>
+              <th>Total Job Offers</th>
+              <th>Placement Rate (%)</th>
+              <th>Highest CTC (LPA)</th>
+              <th>Average CTC (LPA)</th>
+              <th>Companies Visited</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in placements %}
+            <tr>
+              <td><strong>{{ p.academic_year }}</strong></td>
+              <td class="fw-bold text-navy">{{ p.total_offers }}</td>
+              <td><span class="badge bg-success-subtle text-success fs-6">{{ p.placed_percentage }}%</span></td>
+              <td class="fw-bold text-primary">₹{{ p.highest_package_lpa }} LPA</td>
+              <td>₹{{ p.avg_package_lpa }} LPA</td>
+              <td>{{ p.companies_visited }} Companies</td>
+              <td>
+                {% if p.is_current %}
+                <span class="badge bg-primary text-white"><i class="fa-solid fa-bolt me-1"></i> Ongoing Drive</span>
+                {% else %}
+                <span class="badge bg-secondary">Completed</span>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Top Recruiting Companies Grid -->
+<section class="section-padding section-bg-light">
+  <div class="container">
+    <div class="section-title-wrap">
+      <span class="section-tag"><i class="fa-solid fa-handshake me-1"></i> Corporate Partners</span>
+      <h2 class="section-title">Our Prime Recruiting Partners</h2>
+      <p class="section-subtitle">A glimpse of the international and domestic market leaders that recruit annually from CampusConnect.</p>
+    </div>
+
+    <div class="row g-4 row-cols-2 row-cols-md-4">
+      {% for recruiter in recruiters %}
+      <div class="col">
+        <div class="card h-100 border rounded-4 p-4 text-center shadow-sm bg-white hover-lift">
+          <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 60px;">
+            <img src="{{ recruiter.logo_url }}" alt="{{ recruiter.company_name }}" style="max-height: 48px; max-width: 130px; object-fit: contain;">
+          </div>
+          <h6 class="fw-bold text-navy mb-1">{{ recruiter.company_name }}</h6>
+          <span class="badge bg-primary-subtle text-primary small mb-2">{{ recruiter.tier }}</span>
+          {% if recruiter.highest_pkg_offered %}
+          <div class="small text-muted border-top pt-2 mt-auto">
+            Max CTC: <strong class="text-navy">₹{{ recruiter.highest_pkg_offered }} LPA</strong>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Training & Skill Development Programs -->
+<section class="section-padding">
+  <div class="container">
+    <div class="section-title-wrap">
+      <span class="section-tag"><i class="fa-solid fa-laptop-file me-1"></i> Campus-to-Corporate</span>
+      <h2 class="section-title">Comprehensive Placement Training Framework</h2>
+      <p class="section-subtitle">We invest 300+ hours of structured industrial readiness coaching across every student's undergraduate journey.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="p-4 bg-white border rounded-4 shadow-sm h-100">
+          <div class="dept-icon mb-3">
+            <i class="fa-solid fa-code text-primary"></i>
+          </div>
+          <h5 class="fw-bold text-navy">DSA & System Design</h5>
+          <p class="text-muted small mb-0">Daily coding drills on LeetCode/Codeforces covering dynamic programming, graphs, microservices, and system architecture.</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="p-4 bg-white border rounded-4 shadow-sm h-100">
+          <div class="dept-icon mb-3">
+            <i class="fa-solid fa-comments text-primary"></i>
+          </div>
+          <h5 class="fw-bold text-navy">Soft Skills & Communication</h5>
+          <p class="text-muted small mb-0">Business communication, corporate etiquette, group discussion simulations, and executive presentation mastery.</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="p-4 bg-white border rounded-4 shadow-sm h-100">
+          <div class="dept-icon mb-3">
+            <i class="fa-solid fa-users-viewfinder text-primary"></i>
+          </div>
+          <h5 class="fw-bold text-navy">Industry Mock Interviews</h5>
+          <p class="text-muted small mb-0">One-on-one mock technical and HR rounds conducted by alumni leaders currently working at Google, Amazon, and Microsoft.</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="p-4 bg-white border rounded-4 shadow-sm h-100">
+          <div class="dept-icon mb-3">
+            <i class="fa-solid fa-briefcase text-primary"></i>
+          </div>
+          <h5 class="fw-bold text-navy">Internship Conversion Cell</h5>
+          <p class="text-muted small mb-0">Assisting students in converting 8th-semester paid corporate internships into full-time Pre-Placement Offers (PPOs).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Placement Cell Contact -->
+<section class="section-padding section-bg-light">
+  <div class="container">
+    <div class="card border rounded-4 p-4 p-md-5 bg-white shadow-sm">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <span class="badge-soft-blue mb-2"><i class="fa-solid fa-id-badge me-1"></i> Contact Cell</span>
+          <h3 class="fw-bold text-navy">Connect With Our Corporate Relations Team</h3>
+          <p class="text-muted mb-3">
+            Are you an employer interested in scheduling an on-campus placement drive or hiring students for internships? Reach out to our Placement Directorate.
+          </p>
+          <div class="d-flex flex-wrap gap-4 text-muted small">
+            <div><i class="fa-solid fa-user text-primary me-2"></i> <strong>Director of Placements:</strong> Prof. S. Venkataraghavan</div>
+            <div><i class="fa-solid fa-envelope text-primary me-2"></i> placements@campusconnect.edu</div>
+            <div><i class="fa-solid fa-phone text-primary me-2"></i> +91 80 2345 6795</div>
+          </div>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a href="{{ url_for('public.contact') }}" class="btn-primary-cc">
+            <i class="fa-solid fa-paper-plane me-1"></i> Invite Campus Placement Drive
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

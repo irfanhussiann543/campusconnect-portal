@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Departments — CampusConnect Institute of Technology{% endblock %}
+
+{% block content %}
+<!-- Subpage Header Banner -->
+<section class="py-5 text-white" style="background: linear-gradient(135deg, var(--cc-navy) 0%, var(--cc-royal) 100%);">
+  <div class="container py-3">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-2">
+        <li class="breadcrumb-item"><a href="{{ url_for('public.index') }}" class="text-light text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active text-warning" aria-current="page">Departments</li>
+      </ol>
+    </nav>
+    <h1 class="fw-bold text-white mb-2">Academic Departments</h1>
+    <p class="lead text-light mb-0" style="max-width: 650px; opacity: 0.9;">
+      Discover our specialized engineering divisions driving research, interdisciplinary innovation, and industry collaborations.
+    </p>
+  </div>
+</section>
+
+<!-- Departments Grid -->
+<section class="section-padding">
+  <div class="container">
+    <div class="row g-4">
+      {% for dept in departments %}
+      <div class="col-lg-6">
+        <div class="card h-100 border rounded-4 p-4 shadow-sm hover-lift" style="border-left: 5px solid var(--cc-blue) !important;">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="d-flex align-items-center gap-3">
+              <div class="dept-icon mb-0" style="width: 54px; height: 54px; line-height: 54px; font-size: 1.4rem;">
+                <i class="fa-solid {{ dept.icon }}"></i>
+              </div>
+              <div>
+                <h4 class="fw-bold text-navy mb-0">{{ dept.name }}</h4>
+                <span class="badge bg-primary text-white">Dept Code: {{ dept.code }}</span>
+              </div>
+            </div>
+            <span class="badge bg-secondary-subtle text-secondary">Estd. {{ dept.established_year }}</span>
+          </div>
+
+          <p class="text-muted mb-4">{{ dept.short_intro }}</p>
+
+          <div class="row g-3 mb-4">
+            <div class="col-6 col-sm-4">
+              <div class="bg-light p-2 rounded-3 text-center border">
+                <small class="text-muted d-block">Intake Seats</small>
+                <strong class="text-navy fs-6">{{ dept.intake }} / Year</strong>
+              </div>
+            </div>
+            <div class="col-6 col-sm-4">
+              <div class="bg-light p-2 rounded-3 text-center border">
+                <small class="text-muted d-block">Specialized Labs</small>
+                <strong class="text-navy fs-6">{{ dept.labs_count }} Labs</strong>
+              </div>
+            </div>
+            <div class="col-12 col-sm-4">
+              <div class="bg-light p-2 rounded-3 text-center border">
+                <small class="text-muted d-block">Programs</small>
+                <strong class="text-navy fs-6">B.Tech, M.Tech, Ph.D</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center justify-content-between border-top pt-3 mt-auto">
+            <div class="small text-muted">
+              <i class="fa-solid fa-user-tie text-primary me-1"></i> HOD: <strong>{{ dept.hod_name }}</strong>
+            </div>
+            <a href="{{ url_for('public.department_detail', code=dept.code) }}" class="btn btn-primary-cc btn-sm">
+              Explore Department <i class="fa-solid fa-arrow-right ms-1"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

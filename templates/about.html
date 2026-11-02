@@ -1,0 +1,260 @@
+{% extends "base.html" %}
+
+{% block title %}About Us — CampusConnect Institute of Technology{% endblock %}
+
+{% block content %}
+<!-- Subpage Header Banner -->
+<section class="py-5 text-white position-relative" style="background: linear-gradient(135deg, var(--cc-navy) 0%, var(--cc-royal) 100%);">
+  <div class="container py-3">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-2">
+        <li class="breadcrumb-item"><a href="{{ url_for('public.index') }}" class="text-light text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active text-warning" aria-current="page">About Us</li>
+      </ol>
+    </nav>
+    <h1 class="fw-bold text-white mb-2">About Our Institution</h1>
+    <p class="lead text-light mb-0" style="max-width: 650px; opacity: 0.9;">
+      A legacy of intellectual curiosity, world-class pedagogical methods, and engineering impact since 2002.
+    </p>
+  </div>
+</section>
+
+<!-- College Overview & Leadership Message -->
+<section class="section-padding">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="section-tag"><i class="fa-solid fa-landmark me-1"></i> Institution Overview</span>
+        <h2 class="section-title">Nurturing Leaders for the Technological Era</h2>
+        <p class="text-muted lead">
+          CampusConnect Institute of Technology was founded with a singular aspiration: to engineer solutions for society's most intricate challenges by harmonizing rigorous academic standards with creative exploration.
+        </p>
+        <p class="text-muted">
+          Sprawling across a 75-acre lush green, eco-sustainable campus in the heart of the tech corridor, CampusConnect serves over 12,500 aspiring innovators. We take pride in our autonomous status, which allows us to dynamically revitalize our syllabus every year in collaboration with top corporate partners such as Google, Microsoft, and Cisco.
+        </p>
+        <div class="d-flex align-items-center gap-4 mt-4 p-3 bg-light rounded-3 border">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" 
+               alt="Chancellor Portrait" class="rounded-circle shadow-sm" style="width: 70px; height: 70px; object-fit: cover;">
+          <div>
+            <h6 class="fw-bold mb-0 text-navy">Dr. Arthur Vance, Ph.D.</h6>
+            <small class="text-primary fw-semibold">Chancellor & Chief Academic Administrator</small>
+            <p class="text-muted small mb-0 fst-italic">"We do not merely teach engineering; we cultivate minds capable of architecting a cleaner, smarter, and more empathetic world."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="row g-3">
+          <div class="col-6">
+            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80" 
+                 alt="Students Collaborating" class="img-fluid rounded-4 shadow-sm w-100" style="height: 230px; object-fit: cover;">
+          </div>
+          <div class="col-6">
+            <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=600&q=80" 
+                 alt="Campus Architecture" class="img-fluid rounded-4 shadow-sm w-100" style="height: 230px; object-fit: cover;">
+          </div>
+          <div class="col-12">
+            <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=800&q=80" 
+                 alt="Campus Seminar Hall" class="img-fluid rounded-4 shadow-sm w-100" style="height: 200px; object-fit: cover;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Vision & Mission -->
+<section class="section-padding section-bg-light">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card h-100 border-0 shadow-sm rounded-4 p-4 p-md-5" style="border-top: 5px solid var(--cc-blue) !important;">
+          <div class="dept-icon mb-3">
+            <i class="fa-solid fa-eye text-primary"></i>
+          </div>
+          <h3 class="fw-bold text-navy mb-3">Our Vision</h3>
+          <p class="text-muted lead" style="font-size: 1.05rem;">
+            To be a globally admired center of holistic technological higher education and translational research, producing visionary engineers committed to societal progress and sustainable industrial innovation.
+          </p>
+          <ul class="text-muted small list-unstyled mt-3">
+            <li class="mb-2"><i class="fa-solid fa-circle-check text-success me-2"></i> Pioneering interdisciplinary problem-solving paradigms.</li>
+            <li class="mb-2"><i class="fa-solid fa-circle-check text-success me-2"></i> Instilling profound human ethics and responsible technological development.</li>
+            <li><i class="fa-solid fa-circle-check text-success me-2"></i> Leading green-campus and sustainability initiatives across all domains.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card h-100 border-0 shadow-sm rounded-4 p-4 p-md-5" style="border-top: 5px solid var(--cc-gold) !important;">
+          <div class="dept-icon mb-3" style="background: #fef3c7; color: var(--cc-gold-dark);">
+            <i class="fa-solid fa-bullseye text-warning"></i>
+          </div>
+          <h3 class="fw-bold text-navy mb-3">Our Mission</h3>
+          <p class="text-muted lead" style="font-size: 1.05rem;">
+            To provide student-centric, experiential learning grounded in fundamentals, powered by advanced infrastructure, and enriched by continuous industrial co-creation and entrepreneurial incubation.
+          </p>
+          <ul class="text-muted small list-unstyled mt-3">
+            <li class="mb-2"><i class="fa-solid fa-circle-check text-warning me-2"></i> Modernize curricula constantly with emerging industry technologies.</li>
+            <li class="mb-2"><i class="fa-solid fa-circle-check text-warning me-2"></i> Facilitate world-class research publications, patents, and startups.</li>
+            <li><i class="fa-solid fa-circle-check text-warning me-2"></i> Ensure equitable access to technical education through generous scholarships.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- History & Heritage Timeline -->
+<section class="section-padding">
+  <div class="container">
+    <div class="section-title-wrap">
+      <span class="section-tag"><i class="fa-solid fa-timeline me-1"></i> Journey of Growth</span>
+      <h2 class="section-title">Milestones in Our History</h2>
+      <p class="section-subtitle">A quick retrospective of how CampusConnect became one of the country's most sought-after technical institutions.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="p-4 rounded-4 bg-white border shadow-sm h-100">
+          <span class="badge bg-primary text-white mb-2 fs-6">2002</span>
+          <h5 class="fw-bold text-navy">Foundation Stone</h5>
+          <p class="text-muted small mb-0">Established with 3 engineering branches and 180 students under the visionary patronage of academic philanthropists.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="p-4 rounded-4 bg-white border shadow-sm h-100">
+          <span class="badge bg-primary text-white mb-2 fs-6">2012</span>
+          <h5 class="fw-bold text-navy">Autonomous Accreditation</h5>
+          <p class="text-muted small mb-0">Granted autonomous status by UGC/AICTE; launched CBCS curriculum and the Central Digital Library complex.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="p-4 rounded-4 bg-white border shadow-sm h-100">
+          <span class="badge bg-primary text-white mb-2 fs-6">2020</span>
+          <h5 class="fw-bold text-navy">AI Innovation Center</h5>
+          <p class="text-muted small mb-0">Inauguration of the dedicated AI & Data Science wing featuring NVIDIA DGX compute clusters and tech incubation labs.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="p-4 rounded-4 bg-white border shadow-sm h-100">
+          <span class="badge bg-warning text-dark mb-2 fs-6">2026</span>
+          <h5 class="fw-bold text-navy">NAAC 'A++' Grade</h5>
+          <p class="text-muted small mb-0">Awarded the highest national accreditation score of 3.72/4.0 and ranked among the Top 30 technical colleges in NIRF.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Infrastructure & Facilities -->
+<section class="section-padding section-bg-light">
+  <div class="container">
+    <div class="section-title-wrap">
+      <span class="section-tag"><i class="fa-solid fa-building-columns me-1"></i> Campus Amenities</span>
+      <h2 class="section-title">World-Class Infrastructure & Facilities</h2>
+      <p class="section-subtitle">Providing students with an environment where learning, research, athletics, and cultural passions flourish symbiotically.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
+          <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=600&q=80" class="card-img-top" style="height: 220px; object-fit: cover;" alt="Central Library">
+          <div class="card-body p-4">
+            <h5 class="fw-bold text-navy mb-2"><i class="fa-solid fa-book-open-reader text-primary me-2"></i> Central Digital Library</h5>
+            <p class="text-muted small mb-0">Home to over 110,000 physical volumes, 15,000+ IEEE/ACM digital journals, high-speed RFID automated kiosks, and 24/7 silent study lounges.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
+          <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" class="card-img-top" style="height: 220px; object-fit: cover;" alt="AI and Robotics Lab">
+          <div class="card-body p-4">
+            <h5 class="fw-bold text-navy mb-2"><i class="fa-solid fa-microchip text-primary me-2"></i> Advanced R&D Laboratories</h5>
+            <p class="text-muted small mb-0">Over 50 specialized engineering labs equipped with NVIDIA GPU servers, Keysight RF test suites, Cadence VLSI EDA, and 3D printing CNC centers.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
+          <img src="https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=600&q=80" class="card-img-top" style="height: 220px; object-fit: cover;" alt="Smart Classrooms">
+          <div class="card-body p-4">
+            <h5 class="fw-bold text-navy mb-2"><i class="fa-solid fa-chalkboard text-primary me-2"></i> Smart Interactive Classrooms</h5>
+            <p class="text-muted small mb-0">Acoustically treated multimedia lecture halls equipped with 4K touch display panels, lecture recording cameras, and high-speed campus Wi-Fi 6.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=600&q=80" class="card-img-top" style="height: 220px; object-fit: cover;" alt="Sports Arena">
+          <div class="card-body p-4">
+            <h5 class="fw-bold text-navy mb-2"><i class="fa-solid fa-volleyball text-primary me-2"></i> Olympic Sports Complex</h5>
+            <p class="text-muted small mb-0">Features an international standard 400m synthetic running track, floodlit football turf, indoor basketball arena, badminton courts, and modern gymnasiums.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
+          <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80" class="card-img-top" style="height: 220px; object-fit: cover;" alt="Hostels">
+          <div class="card-body p-4">
+            <h5 class="fw-bold text-navy mb-2"><i class="fa-solid fa-hotel text-primary me-2"></i> Modern Hostels & Dining</h5>
+            <p class="text-muted small mb-0">Separate air-conditioned and non-AC residential blocks for boys and girls, with biometric security, solar heating, multi-cuisine cafeterias, and laundry.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
+          <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80" class="card-img-top" style="height: 220px; object-fit: cover;" alt="Incubation Center">
+          <div class="card-body p-4">
+            <h5 class="fw-bold text-navy mb-2"><i class="fa-solid fa-lightbulb text-primary me-2"></i> Startup Incubation Hub</h5>
+            <p class="text-muted small mb-0">A 15,000 sq.ft co-working hub offering seed funding, legal mentoring, intellectual property support, and pre-incubation grants to student founders.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Accreditations & Recognitions -->
+<section class="section-padding">
+  <div class="container text-center">
+    <span class="section-tag"><i class="fa-solid fa-award me-1"></i> Accreditations</span>
+    <h2 class="section-title mb-5">Recognitions of Excellence</h2>
+
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-3 col-6">
+        <div class="p-4 rounded-4 border bg-white shadow-sm">
+          <i class="fa-solid fa-shield-halved fs-1 text-primary mb-3"></i>
+          <h5 class="fw-bold mb-1">NAAC 'A++'</h5>
+          <p class="text-muted small mb-0">National Assessment Council (Score 3.72/4.0)</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="p-4 rounded-4 border bg-white shadow-sm">
+          <i class="fa-solid fa-award fs-1 text-warning mb-3"></i>
+          <h5 class="fw-bold mb-1">NBA Accredited</h5>
+          <p class="text-muted small mb-0">Tier-1 Washington Accord for all 6 core branches</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="p-4 rounded-4 border bg-white shadow-sm">
+          <i class="fa-solid fa-trophy fs-1 text-success mb-3"></i>
+          <h5 class="fw-bold mb-1">NIRF Top 30</h5>
+          <p class="text-muted small mb-0">Ministry of Education National Institutional Ranking</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="p-4 rounded-4 border bg-white shadow-sm">
+          <i class="fa-solid fa-certificate fs-1 text-info mb-3"></i>
+          <h5 class="fw-bold mb-1">ISO 9001:2015</h5>
+          <p class="text-muted small mb-0">Certified for quality educational delivery</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}{{ event.title }} — CampusConnect Events{% endblock %}
+
+{% block content %}
+<!-- Subpage Header Banner -->
+<section class="py-5 text-white" style="background: linear-gradient(135deg, var(--cc-navy) 0%, var(--cc-royal) 100%);">
+  <div class="container py-3">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-2">
+        <li class="breadcrumb-item"><a href="{{ url_for('public.index') }}" class="text-light text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('public.events') }}" class="text-light text-decoration-none">Events</a></li>
+        <li class="breadcrumb-item active text-warning" aria-current="page">{{ event.title }}</li>
+      </ol>
+    </nav>
+    <span class="badge bg-warning text-dark mb-2 px-3 py-1">{{ event.category }}</span>
+    <h1 class="fw-bold text-white mb-2">{{ event.title }}</h1>
+    <p class="lead text-light mb-0" style="max-width: 650px; opacity: 0.9;">
+      Organized by {{ event.organizer }}
+    </p>
+  </div>
+</section>
+
+<!-- Event Details and Registration Form -->
+<section class="section-padding">
+  <div class="container">
+    <div class="row g-5">
+      <!-- Left Column: Image, Info, Detailed Write-up -->
+      <div class="col-lg-8">
+        <div class="rounded-4 overflow-hidden mb-4 shadow-sm" style="height: 380px;">
+          <img src="{{ event.image_url }}" alt="{{ event.title }}" class="w-100 h-100" style="object-fit: cover;">
+        </div>
+
+        <h3 class="fw-bold text-navy mb-3">Event Overview & Schedule</h3>
+        <p class="text-muted lead mb-4" style="font-size: 1.05rem;">
+          {{ event.description }}
+        </p>
+
+        <div class="row g-3 mb-5">
+          <div class="col-sm-6">
+            <div class="p-3 bg-light rounded-3 border">
+              <span class="text-muted small d-block">Scheduled Date</span>
+              <strong class="text-navy fs-6"><i class="fa-regular fa-calendar-check text-primary me-2"></i> {{ event.event_date.strftime('%A, %B %d, %Y') }}</strong>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="p-3 bg-light rounded-3 border">
+              <span class="text-muted small d-block">Time & Duration</span>
+              <strong class="text-navy fs-6"><i class="fa-regular fa-clock text-primary me-2"></i> {{ event.event_time }}</strong>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="p-3 bg-light rounded-3 border">
+              <span class="text-muted small d-block">Campus Venue</span>
+              <strong class="text-navy fs-6"><i class="fa-solid fa-location-dot text-primary me-2"></i> {{ event.venue }}</strong>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="p-3 bg-light rounded-3 border">
+              <span class="text-muted small d-block">Maximum Capacity</span>
+              <strong class="text-navy fs-6"><i class="fa-solid fa-users text-primary me-2"></i> {{ registered_count }} / {{ event.max_seats }} Registered</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 bg-white rounded-4 border shadow-sm">
+          <h5 class="fw-bold text-navy mb-2"><i class="fa-solid fa-circle-question text-primary me-2"></i> Guidelines & Prerequisites</h5>
+          <ul class="text-muted small mb-0">
+            <li class="mb-2">Participants are requested to bring their student / college photo identification cards.</li>
+            <li class="mb-2">For hackathons and coding workshops, personal laptops with chargers are required.</li>
+            <li>Certificates of participation will be issued to all verified attendees.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right Column: Registration Form -->
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-lg rounded-4 p-4 sticky-top" style="top: 100px;">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="badge-soft-blue"><i class="fa-solid fa-ticket me-1"></i> Registration</span>
+            <span class="text-success small fw-bold"><i class="fa-solid fa-circle-check me-1"></i> Open to All</span>
+          </div>
+          <h4 class="fw-bold text-navy mb-1">Reserve Your Seat</h4>
+          <p class="text-muted small mb-4">Complete the quick registration form below to receive your entry confirmation badge.</p>
+
+          <form action="{{ url_for('public.event_register', event_id=event.id) }}" method="POST">
+            <div class="mb-3">
+              <label class="form-label small fw-bold text-navy">Participant Full Name *</label>
+              <input type="text" name="participant_name" class="form-control rounded-3" placeholder="e.g., Ananya Deshmukh" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold text-navy">Email Address *</label>
+              <input type="email" name="email" class="form-control rounded-3" placeholder="ananya@example.com" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold text-navy">Contact Phone *</label>
+              <input type="tel" name="phone" class="form-control rounded-3" placeholder="+91 98765 43210" required>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label small fw-bold text-navy">College / Department Name *</label>
+              <input type="text" name="college_or_dept" class="form-control rounded-3" placeholder="e.g., CampusConnect - CSE 3rd Year" required>
+            </div>
+
+            <button type="submit" class="btn-primary-cc w-100 justify-content-center py-2">
+              <i class="fa-solid fa-paper-plane me-1"></i> Confirm Free Registration
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends "admin/layout.html" %}
+
+{% block title %}Manage Departments — CampusConnect Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h3 class="fw-bold text-navy mb-1">Academic Engineering Departments</h3>
+    <p class="text-muted small mb-0">Configure department introductions, HOD leadership, annual intake capacity, and lab metrics.</p>
+  </div>
+</div>
+
+<div class="row g-4">
+  {% for d in departments %}
+  <div class="col-lg-6">
+    <div class="card border rounded-4 shadow-sm h-100 p-4">
+      <div class="d-flex justify-content-between align-items-start mb-3">
+        <div class="d-flex align-items-center gap-3">
+          <div class="dept-icon mb-0" style="width: 50px; height: 50px; line-height: 50px; font-size: 1.3rem;">
+            <i class="fa-solid {{ d.icon }}"></i>
+          </div>
+          <div>
+            <h5 class="fw-bold text-navy mb-0">{{ d.name }}</h5>
+            <span class="badge bg-primary">Dept Code: {{ d.code }}</span>
+          </div>
+        </div>
+        <button class="btn btn-outline-primary btn-sm rounded-3"
+                data-bs-toggle="modal"
+                data-bs-target="#editModal"
+                data-action="{{ url_for('admin.edit_department', id=d.id) }}"
+                data-name="{{ d.name }}"
+                data-short_intro="{{ d.short_intro }}"
+                data-description="{{ d.description }}"
+                data-hod_name="{{ d.hod_name }}"
+                data-hod_email="{{ d.hod_email }}"
+                data-hod_qualification="{{ d.hod_qualification }}"
+                data-intake="{{ d.intake }}"
+                data-labs_count="{{ d.labs_count }}"
+                data-icon="{{ d.icon }}">
+          <i class="fa-solid fa-pen-to-square me-1"></i> Edit Info
+        </button>
+      </div>
+
+      <p class="text-muted small mb-3">{{ d.short_intro }}</p>
+
+      <div class="p-3 bg-light rounded-3 mb-3 border">
+        <div class="row g-2 text-muted small">
+          <div class="col-6"><i class="fa-solid fa-user-tie text-primary me-1"></i> HOD: <strong>{{ d.hod_name }}</strong></div>
+          <div class="col-6"><i class="fa-solid fa-envelope text-primary me-1"></i> {{ d.hod_email }}</div>
+          <div class="col-6"><i class="fa-solid fa-users text-primary me-1"></i> Annual Intake: <strong>{{ d.intake }} Seats</strong></div>
+          <div class="col-6"><i class="fa-solid fa-flask-vial text-primary me-1"></i> Active Labs: <strong>{{ d.labs_count }} Labs</strong></div>
+        </div>
+      </div>
+
+      <div class="mt-auto d-flex justify-content-between align-items-center border-top pt-3 small text-muted">
+        <span>Faculty Members in System: <strong>{{ d.faculty_members|length }}</strong></span>
+        <a href="{{ url_for('public.department_detail', code=d.code) }}" target="_blank" class="text-decoration-none">
+          View Public Page <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Modal: Edit Department -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content rounded-4 border-0 shadow-lg">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="fw-bold text-navy mb-0"><i class="fa-solid fa-pen-to-square text-primary me-2"></i> Edit Department Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <form id="editForm" method="POST">
+        <div class="modal-body p-4">
+          <div class="row g-3">
+            <div class="col-md-8">
+              <label class="form-label small fw-bold">Department Name *</label>
+              <input type="text" name="name" class="form-control rounded-3" required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-bold">FontAwesome Icon Class</label>
+              <input type="text" name="icon" class="form-control rounded-3" placeholder="fa-laptop-code" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label small fw-bold">Short Introduction (Shown on Cards) *</label>
+              <input type="text" name="short_intro" class="form-control rounded-3" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label small fw-bold">Detailed Overview & Vision *</label>
+              <textarea name="description" rows="4" class="form-control rounded-3" required></textarea>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold">Head of Department (HOD) Name *</label>
+              <input type="text" name="hod_name" class="form-control rounded-3" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold">HOD Email *</label>
+              <input type="email" name="hod_email" class="form-control rounded-3" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold">HOD Qualification</label>
+              <input type="text" name="hod_qualification" class="form-control rounded-3">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label small fw-bold">Annual Intake *</label>
+              <input type="number" name="intake" class="form-control rounded-3" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label small fw-bold">Labs Count *</label>
+              <input type="number" name="labs_count" class="form-control rounded-3" required>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer border-0 pt-0">
+          <button type="button" class="btn btn-light rounded-3" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary-cc">Save Department Info</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

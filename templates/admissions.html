@@ -1,0 +1,344 @@
+{% extends "base.html" %}
+
+{% block title %}Admissions 2026-2027 — CampusConnect Institute of Technology{% endblock %}
+
+{% block content %}
+<!-- Subpage Header Banner -->
+<section class="py-5 text-white" style="background: linear-gradient(135deg, var(--cc-navy) 0%, var(--cc-royal) 100%);">
+  <div class="container py-3">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-2">
+        <li class="breadcrumb-item"><a href="{{ url_for('public.index') }}" class="text-light text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active text-warning" aria-current="page">Admissions</li>
+      </ol>
+    </nav>
+    <h1 class="fw-bold text-white mb-2">Admissions 2026-2027</h1>
+    <p class="lead text-light mb-0" style="max-width: 650px; opacity: 0.9;">
+      Join a community of forward-thinking problem solvers. Applications are now invited for undergraduate and postgraduate engineering batches.
+    </p>
+  </div>
+</section>
+
+<!-- Admission Procedure Roadmap -->
+<section class="section-padding">
+  <div class="container">
+    <div class="section-title-wrap">
+      <span class="section-tag"><i class="fa-solid fa-route me-1"></i> How to Apply</span>
+      <h2 class="section-title">Step-by-Step Admission Process</h2>
+      <p class="section-subtitle">A transparent, merit-guided pathway to securing your seat at CampusConnect.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="p-4 rounded-4 bg-white border text-center shadow-sm h-100">
+          <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px; font-weight: 800; font-size: 1.2rem;">
+            1
+          </div>
+          <h5 class="fw-bold text-navy">Online Application</h5>
+          <p class="text-muted small mb-0">Fill in your academic credentials, 10th & 12th marks, and branch preferences via our portal.</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="p-4 rounded-4 bg-white border text-center shadow-sm h-100">
+          <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px; font-weight: 800; font-size: 1.2rem;">
+            2
+          </div>
+          <h5 class="fw-bold text-navy">Merit Screening</h5>
+          <p class="text-muted small mb-0">Scrutiny of PCM cut-off marks and entrance scores (JEE Main / State CET / CampusConnect CET).</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="p-4 rounded-4 bg-white border text-center shadow-sm h-100">
+          <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px; font-weight: 800; font-size: 1.2rem;">
+            3
+          </div>
+          <h5 class="fw-bold text-navy">Counseling & Seat Offer</h5>
+          <p class="text-muted small mb-0">Interactive counseling session (online or in-person) followed by official seat allocation letter.</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="p-4 rounded-4 bg-white border text-center shadow-sm h-100">
+          <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px; font-weight: 800; font-size: 1.2rem;">
+            4
+          </div>
+          <h5 class="fw-bold text-navy">Verification & Enrolment</h5>
+          <p class="text-muted small mb-0">Original certificates verification, tuition payment, and student hostel room allotment.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Eligibility Criteria & Seat Matrix -->
+<section class="section-padding section-bg-light">
+  <div class="container">
+    <div class="row g-5">
+      <!-- Eligibility -->
+      <div class="col-lg-6">
+        <span class="section-tag mb-2"><i class="fa-solid fa-clipboard-check me-1"></i> Qualifications</span>
+        <h3 class="fw-bold text-navy mb-4">Eligibility Criteria</h3>
+        
+        <div class="p-4 bg-white rounded-4 border shadow-sm mb-4">
+          <h5 class="fw-bold text-primary mb-2">B.Tech 4-Year Undergraduate Program</h5>
+          <ul class="text-muted small mb-0">
+            <li class="mb-2"><strong>Qualifying Exam:</strong> Passed 10+2 (Higher Secondary) with Physics, Chemistry, and Mathematics (PCM).</li>
+            <li class="mb-2"><strong>Minimum Marks:</strong> Aggregate minimum of 60% in PCM (50% for reserved categories).</li>
+            <li class="mb-2"><strong>Accepted Entrance Exams:</strong> JEE Main, KCET, COMEDK, or CampusConnect Aptitude Test.</li>
+            <li><strong>Age Requirement:</strong> Candidates must have attained 17 years of age as of Dec 31, 2026.</li>
+          </ul>
+        </div>
+
+        <div class="p-4 bg-white rounded-4 border shadow-sm">
+          <h5 class="fw-bold text-warning mb-2">M.Tech 2-Year Postgraduate Program</h5>
+          <ul class="text-muted small mb-0">
+            <li class="mb-2"><strong>Qualifying Degree:</strong> B.E. / B.Tech in relevant engineering discipline with min 60% CGPA.</li>
+            <li><strong>Selection:</strong> Valid GATE score receives direct interview admission; non-GATE through university written test.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Seat Matrix Table -->
+      <div class="col-lg-6">
+        <span class="section-tag mb-2"><i class="fa-solid fa-chair me-1"></i> Intake Statistics</span>
+        <h3 class="fw-bold text-navy mb-4">Approved Seat Matrix (2026-27)</h3>
+
+        <div class="table-responsive bg-white rounded-4 border shadow-sm">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>Branch Code</th>
+                <th>Engineering Program</th>
+                <th class="text-center">Annual Intake</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for d in departments %}
+              <tr>
+                <td><span class="badge bg-primary text-white">{{ d.code }}</span></td>
+                <td><strong>{{ d.name }}</strong></td>
+                <td class="text-center fw-bold text-navy">{{ d.intake }} Seats</td>
+              </tr>
+              {% endfor %}
+              <tr class="table-light fw-bold">
+                <td colspan="2">Total Approved Engineering Intake</td>
+                <td class="text-center text-primary">780 Seats</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Fee Structure & Scholarships -->
+<section class="section-padding">
+  <div class="container">
+    <div class="section-title-wrap">
+      <span class="section-tag"><i class="fa-solid fa-indian-rupee-sign me-1"></i> Financials</span>
+      <h2 class="section-title">Fee Structure & Scholarships</h2>
+      <p class="section-subtitle">Affordable fee matrix transparently structured with comprehensive merit concessions.</p>
+    </div>
+
+    <div class="row g-4 mb-5">
+      <div class="col-lg-7">
+        <div class="card border rounded-4 shadow-sm overflow-hidden">
+          <div class="card-header bg-navy text-white p-3" style="background-color: var(--cc-navy);">
+            <h5 class="mb-0 fw-bold"><i class="fa-solid fa-receipt me-2 text-warning"></i> Annual Academic Fee Schedule (Per Annum)</h5>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered mb-0 small">
+              <thead class="table-light">
+                <tr>
+                  <th>Component</th>
+                  <th>CSE / AI&DS</th>
+                  <th>ECE / EEE</th>
+                  <th>MECH / CIVIL</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tuition Fee (Annual)</td>
+                  <td>₹1,45,000</td>
+                  <td>₹1,25,000</td>
+                  <td>₹1,05,000</td>
+                </tr>
+                <tr>
+                  <td>Lab & Computing Facility Fee</td>
+                  <td>₹25,000</td>
+                  <td>₹22,000</td>
+                  <td>₹20,000</td>
+                </tr>
+                <tr>
+                  <td>Library, Sports & Activities</td>
+                  <td>₹15,000</td>
+                  <td>₹15,000</td>
+                  <td>₹15,000</td>
+                </tr>
+                <tr>
+                  <td>Caution Deposit (Refundable)</td>
+                  <td>₹10,000</td>
+                  <td>₹10,000</td>
+                  <td>₹10,000</td>
+                </tr>
+                <tr class="table-light fw-bold text-primary">
+                  <td>Total First Year Academic Fee</td>
+                  <td>₹1,95,000</td>
+                  <td>₹1,72,000</td>
+                  <td>₹1,50,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="p-3 bg-light text-muted small border-top">
+            <strong>Hostel Accommodation (Optional):</strong> AC Double Occupancy: ₹95,000/yr | Non-AC 3-Sharing: ₹75,000/yr (Includes 4 daily meals and Wi-Fi).
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="card h-100 border rounded-4 p-4 shadow-sm bg-light">
+          <h5 class="fw-bold text-navy mb-3"><i class="fa-solid fa-hand-holding-dollar text-warning me-2"></i> Chancellor's Merit Scholarships</h5>
+          <p class="text-muted small">We firmly believe financial constraints should never extinguish bright intellects. We award over ₹2.5 Crores in scholarships each year:</p>
+          
+          <div class="mb-3 p-3 bg-white rounded-3 border">
+            <div class="d-flex justify-content-between mb-1">
+              <strong class="text-navy">95%+ in 10+2 PCM</strong>
+              <span class="badge bg-success">75% Tuition Waiver</span>
+            </div>
+            <small class="text-muted">Renewable across all 4 years with CGPA &gt; 8.5.</small>
+          </div>
+
+          <div class="mb-3 p-3 bg-white rounded-3 border">
+            <div class="d-flex justify-content-between mb-1">
+              <strong class="text-navy">90% - 94.9% in 10+2 PCM</strong>
+              <span class="badge bg-primary">50% Tuition Waiver</span>
+            </div>
+            <small class="text-muted">Applicable for top 50 qualifying candidates.</small>
+          </div>
+
+          <div class="p-3 bg-white rounded-3 border">
+            <div class="d-flex justify-content-between mb-1">
+              <strong class="text-navy">National Sports Representation</strong>
+              <span class="badge bg-warning text-dark">100% Free Hostel & Sports Kit</span>
+            </div>
+            <small class="text-muted">For state and national level athletic medalists.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Online Application Form Section -->
+<section class="section-padding section-bg-light" id="apply">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5 bg-white">
+          <div class="text-center mb-4">
+            <span class="badge-soft-blue mb-2"><i class="fa-solid fa-file-pen me-1"></i> Registration Form</span>
+            <h2 class="fw-bold text-navy">Official Online Admission Application</h2>
+            <p class="text-muted small">Academic Year 2026-2027 • Fill out all accurate details to receive your provisional registration token.</p>
+          </div>
+
+          <form action="{{ url_for('public.submit_application') }}" method="POST">
+            <div class="row g-3">
+              <!-- Full Name -->
+              <div class="col-md-6">
+                <label class="form-label fw-bold text-navy small">Applicant's Full Name (as per 10th Certificate) *</label>
+                <input type="text" name="full_name" class="form-control rounded-3" placeholder="e.g., Rohan Rajesh Mehta" required>
+              </div>
+
+              <!-- Email -->
+              <div class="col-md-6">
+                <label class="form-label fw-bold text-navy small">Email Address *</label>
+                <input type="email" name="email" class="form-control rounded-3" placeholder="rohan.mehta@example.com" required>
+              </div>
+
+              <!-- Phone -->
+              <div class="col-md-6">
+                <label class="form-label fw-bold text-navy small">Mobile Number (WhatsApp Enabled) *</label>
+                <input type="tel" name="phone" class="form-control rounded-3" placeholder="+91 98765 43210" required>
+              </div>
+
+              <!-- Date of Birth -->
+              <div class="col-md-3">
+                <label class="form-label fw-bold text-navy small">Date of Birth *</label>
+                <input type="date" name="dob" class="form-control rounded-3" required>
+              </div>
+
+              <!-- Gender -->
+              <div class="col-md-3">
+                <label class="form-label fw-bold text-navy small">Gender *</label>
+                <select name="gender" class="form-select rounded-3" required>
+                  <option value="" disabled selected>Select</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <!-- Parent Name -->
+              <div class="col-md-6">
+                <label class="form-label fw-bold text-navy small">Parent / Guardian Full Name *</label>
+                <input type="text" name="parent_name" class="form-control rounded-3" placeholder="e.g., Rajesh Mehta" required>
+              </div>
+
+              <!-- Parent Phone -->
+              <div class="col-md-6">
+                <label class="form-label fw-bold text-navy small">Parent's Mobile Number *</label>
+                <input type="tel" name="parent_phone" class="form-control rounded-3" placeholder="+91 98765 11111" required>
+              </div>
+
+              <!-- Department Choice -->
+              <div class="col-md-6">
+                <label class="form-label fw-bold text-navy small">Primary Department Choice *</label>
+                <select name="department_choice" class="form-select rounded-3" required>
+                  <option value="" disabled selected>Select Preferred Engineering Discipline</option>
+                  {% for dept in departments %}
+                  <option value="{{ dept.name }} ({{ dept.code }})">{{ dept.name }} ({{ dept.code }})</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <!-- Entrance Score -->
+              <div class="col-md-6">
+                <label class="form-label fw-bold text-navy small">Entrance Exam & Percentile / Rank (If applicable)</label>
+                <input type="text" name="entrance_score" class="form-control rounded-3" placeholder="e.g., JEE Main 94.2 %ile or KCET Rank 4120">
+              </div>
+
+              <!-- 10th Percentage -->
+              <div class="col-md-6">
+                <label class="form-label fw-bold text-navy small">10th Standard Aggregate Percentage (%) *</label>
+                <input type="number" step="0.01" name="tenth_percentage" class="form-control rounded-3" placeholder="e.g., 92.5" required>
+              </div>
+
+              <!-- 12th Percentage -->
+              <div class="col-md-6">
+                <label class="form-label fw-bold text-navy small">12th Standard / +2 PCM Percentage (%) *</label>
+                <input type="number" step="0.01" name="twelfth_percentage" class="form-control rounded-3" placeholder="e.g., 89.4" required>
+              </div>
+
+              <!-- Residential Address -->
+              <div class="col-12">
+                <label class="form-label fw-bold text-navy small">Residential Permanent Address *</label>
+                <textarea name="address" rows="3" class="form-control rounded-3" placeholder="Full address with city, state, and postal pincode" required></textarea>
+              </div>
+
+              <div class="col-12 mt-4 text-center">
+                <button type="submit" class="btn-gold-cc btn-lg px-5">
+                  <i class="fa-solid fa-paper-plane me-2"></i> Submit Application & Generate ID
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}Faculty Directory — CampusConnect Institute of Technology{% endblock %}
+
+{% block content %}
+<!-- Subpage Header Banner -->
+<section class="py-5 text-white" style="background: linear-gradient(135deg, var(--cc-navy) 0%, var(--cc-royal) 100%);">
+  <div class="container py-3">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-2">
+        <li class="breadcrumb-item"><a href="{{ url_for('public.index') }}" class="text-light text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active text-warning" aria-current="page">Faculty Directory</li>
+      </ol>
+    </nav>
+    <h1 class="fw-bold text-white mb-2">Distinguished Faculty & Scholars</h1>
+    <p class="lead text-light mb-0" style="max-width: 650px; opacity: 0.9;">
+      Over 450 eminent professors, researchers, and patent holders from premier institutes like IITs, IISc, and top global universities.
+    </p>
+  </div>
+</section>
+
+<!-- Search and Department Filters Section -->
+<section class="py-4 bg-light border-bottom">
+  <div class="container">
+    <div class="row g-3 align-items-center">
+      <!-- Search Input -->
+      <div class="col-md-6 col-lg-5">
+        <div class="input-group">
+          <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+          <input type="text" id="facultySearchInput" class="form-control border-start-0 py-2" placeholder="Search by professor name, specialization, or qualification...">
+        </div>
+      </div>
+
+      <!-- Department Filter Pills -->
+      <div class="col-md-6 col-lg-7">
+        <div class="d-flex flex-wrap gap-2 justify-content-md-end">
+          <a href="{{ url_for('public.faculty', dept='ALL') }}" class="btn btn-sm {{ 'btn-primary-cc' if selected_dept == 'ALL' else 'btn-outline-secondary' }} rounded-pill px-3">
+            All Departments
+          </a>
+          {% for dept in departments %}
+          <a href="{{ url_for('public.faculty', dept=dept.code) }}" class="btn btn-sm {{ 'btn-primary-cc' if selected_dept == dept.code else 'btn-outline-secondary' }} rounded-pill px-3">
+            {{ dept.code }}
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Faculty Profile Cards Grid -->
+<section class="section-padding">
+  <div class="container">
+    <div class="row g-4" id="facultyCardsGrid">
+      {% for f in faculty_list %}
+      <div class="col-md-6 col-lg-4 col-xl-3 faculty-item">
+        <div class="faculty-card">
+          <div class="faculty-img-wrap">
+            <img src="{{ f.photo_url }}" alt="{{ f.name }}">
+            <span class="badge bg-primary position-absolute bottom-0 start-0 m-3 shadow-sm">
+              {{ f.department.code }}
+            </span>
+          </div>
+          <div class="faculty-body">
+            <h5 class="faculty-name">{{ f.name }}</h5>
+            <div class="faculty-designation">{{ f.designation }}</div>
+            <div class="small text-muted mb-2"><i class="fa-solid fa-graduation-cap text-primary me-1"></i> {{ f.qualification }}</div>
+            <p class="faculty-spec"><i class="fa-solid fa-atom text-warning me-1"></i> {{ f.specialization }}</p>
+            
+            <div class="border-top pt-3 mt-auto">
+              <a href="mailto:{{ f.email }}" class="btn btn-outline-primary btn-sm w-100 rounded-3 mb-2" title="{{ f.email }}">
+                <i class="fa-solid fa-envelope me-1"></i> Contact Faculty
+              </a>
+              <button type="button" class="btn btn-light btn-sm w-100 text-muted border" 
+                      data-bs-toggle="modal" 
+                      data-bs-target="#facultyModal{{ f.id }}">
+                <i class="fa-solid fa-circle-info me-1"></i> View Full Bio & Research
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Faculty Detail Modal -->
+        <div class="modal fade" id="facultyModal{{ f.id }}" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow-lg">
+              <div class="modal-header border-0 pb-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body p-4 text-center">
+                <img src="{{ f.photo_url }}" alt="{{ f.name }}" class="rounded-circle shadow mb-3" style="width: 100px; height: 100px; object-fit: cover;">
+                <h4 class="fw-bold text-navy mb-1">{{ f.name }}</h4>
+                <p class="text-primary fw-semibold mb-1">{{ f.designation }}</p>
+                <span class="badge bg-primary text-white mb-3">Department of {{ f.department.name }}</span>
+
+                <div class="text-start bg-light p-3 rounded-3 mb-3 border">
+                  <div class="mb-2"><strong class="text-navy small">Qualification:</strong> <span class="small text-muted d-block">{{ f.qualification }}</span></div>
+                  <div class="mb-2"><strong class="text-navy small">Teaching & Research Experience:</strong> <span class="small text-muted d-block">{{ f.experience_years }} Years</span></div>
+                  <div class="mb-2"><strong class="text-navy small">Specialization:</strong> <span class="small text-muted d-block">{{ f.specialization }}</span></div>
+                  {% if f.research_areas %}
+                  <div class="mb-2"><strong class="text-navy small">Active Research Areas:</strong> <span class="small text-muted d-block">{{ f.research_areas }}</span></div>
+                  {% endif %}
+                  {% if f.bio %}
+                  <div><strong class="text-navy small">Biographical Summary:</strong> <span class="small text-muted d-block">{{ f.bio }}</span></div>
+                  {% endif %}
+                </div>
+
+                <div class="d-flex justify-content-center gap-2">
+                  <a href="mailto:{{ f.email }}" class="btn btn-primary-cc btn-sm px-4">
+                    <i class="fa-solid fa-envelope me-1"></i> Send Email
+                  </a>
+                  {% if f.phone %}
+                  <a href="tel:{{ f.phone }}" class="btn btn-outline-secondary btn-sm px-3">
+                    <i class="fa-solid fa-phone me-1"></i> Call Office
+                  </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
